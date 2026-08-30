@@ -1,4 +1,23 @@
-# Light-it QA Automation Challenge
+# Light-it QA Challenge
+
+## Challenge Structure
+
+### Part 1 — QA Strategy
+- Testing document
+- Test cases RTM
+- Test evidence Video 1
+
+### Part 2 — SQL
+- SQL queries for data validation
+
+### Part 3 — API Testing
+- Postman collection (fill in with user email and password on collection variables before running)
+
+### Part 4 — UI Automation
+- Driver
+- Pages
+- UI automated tests
+
 
 UI automation framework for the **Medical Appointment System** QA challenge.
 
@@ -160,7 +179,7 @@ The `.env` file is excluded from version control.
 Run all scenarios:
 
 ```bash
-behave
+behave tests/features
 ```
 
 Run a specific feature:
@@ -169,41 +188,24 @@ Run a specific feature:
 behave tests/features/login.feature
 ```
 
-Run all features:
-
-```bash
-behave tests/features/
-```
-
 ---
 
 # Allure Reports
 
-The framework is configured to generate Allure results automatically.
-
-Each Behave step includes a UI screenshot captured after the step completes.
-
-Run:
-
-```bash
-behave
-```
-
-This generates:
+The framework is configured to generate Allure results automatically. Once you have this folder on your repository:
 
 ```text
 allure-results/
 ```
 
-Generate the HTML report:
+To generate the HTML report, run:
 
 ```bash
 allure generate allure-results -o allure-report --clean
 ```
 
-The generated report is a static HTML report and does not require the Allure server to be running.
 
-Open:
+To open:
 
 ```bash
 allure open allure-report
@@ -217,18 +219,31 @@ The report contains screenshots associated with each executed step, which makes 
 
 The project can also be executed inside Docker to provide a consistent test environment.
 
-Build the image:
+Build image:
 
 ```bash
-docker build -t light-it-qa-challenge .
+docker build -t medappoint-tests .
 ```
 
-Run the tests:
+Run tests and persist Allure results locally:
 
 ```bash
 docker run --rm \
   --env-file .env \
-  light-it-qa-challenge
+  -v "$(pwd)/allure-results:/app/allure-results" \
+  medappoint-tests
+```
+
+Generate Allure report
+
+```bash
+allure generate allure-results -o allure-report --clean
+```
+
+Open report
+
+```bash
+allure open allure-report
 ```
 
 The Docker image contains the Python dependencies and Playwright browser required to execute the test suite.
