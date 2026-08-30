@@ -1,0 +1,23 @@
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Python virtual environment
+.venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Allure reports
+allure-results/
+allure-report/
+
+# Screenshots
+*.png
+
+# IDE / OS files
+.idea/
+.vscode/
+.DS_Store
